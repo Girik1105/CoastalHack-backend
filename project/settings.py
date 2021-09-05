@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import environ
+from datetime import timedelta
 import os
 
 env = environ.Env(
@@ -49,6 +50,10 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'corsheaders',
+
+    'rest_framework_simplejwt',
+
+    'users',
 ]
 
 REST_FRAMEWORK = {
@@ -69,8 +74,21 @@ REST_FRAMEWORK = {
 
     # Added default schema class because by default django rest required this class
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
-    
-    'DEFAULT_PAGINATION_CLASS':'rest_api.utils.CustomPagination',
+}
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=10),
+    'ROTATE_REFRESH_TOKENS': True,
+    'BLACKLIST_AFTER_ROTATION': True,
+    'ALGORITHM': 'HS256',
+    'SIGNING_KEY': SECRET_KEY,
+    'VERIFYING_KEY': None,
+    'AUTH_HEADER_TYPES': ('JWT',),
+    'USER_ID_FIELD': 'id',
+    'USER_ID_CLAIM': 'user_id',
+    'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
+    'TOKEN_TYPE_CLAIM': 'token_type',
 }
 
 MIDDLEWARE = [
@@ -161,5 +179,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 CORS_ALLOWED_ORIGINS = [
-    "http://127.0.0.1:8000"
+    "http://127.0.0.1:8000",
 ]
+
+AUTH_USER_MODEL = "users.NewUser"
