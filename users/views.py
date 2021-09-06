@@ -1,12 +1,25 @@
 from django.shortcuts import render
 from rest_framework_simplejwt.views import TokenObtainPairView
+
 from rest_framework import status
 from rest_framework.response import Response
+
 from rest_framework.views import APIView
-from .serializers import CustomUserSerializer
+from rest_framework.generics import ListAPIView
+
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import AllowAny
 
+from django.contrib.auth import authenticate, get_user_model
+User = get_user_model()
+
+from .serializers import CustomUserSerializer
+from . import serializers
+
+class user_list(ListAPIView):
+    serializer_class = serializers.UserSerializer
+    def get_queryset(self, *args, **kwargs):
+        return User.objects.all()
 
 class CustomUserCreate(APIView):
     permission_classes = [AllowAny]

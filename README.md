@@ -15,6 +15,15 @@ python manage.py runserver
 
 # Endpoints:
 
+# Users
+```
+users/register/
+```
+Methods allowed: GET
+Parameters needed: None
+
+This endpoint returns a list of all users.
+
 # Auth Endpoints 
 ```
 users/register/
