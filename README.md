@@ -17,7 +17,7 @@ python manage.py runserver
 
 # Users
 ```
-users/register/
+users/
 ```
 Methods allowed: GET
 Parameters needed: None
