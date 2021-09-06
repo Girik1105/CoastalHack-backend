@@ -182,6 +182,28 @@ use this endpoint to delete any users post of any specific community. Note: if a
 
 
 # Tests
+All endpoints are tested through scripts.
+
+Enter the scripts directory
 ```
-python manage.py test
+cd project/scripts/community
+```
+
+Run the scripts
+```
+python create.py
+python edit.py
+python list.py
+python delete.py
+```
+
+```
+cd project/scripts/community-posts
+```
+
+Run the scripts
+```
+python create.py
+python list.py
+python delete.py
 ```
