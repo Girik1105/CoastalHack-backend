@@ -30,7 +30,7 @@ class member(models.Model):
     is_verified = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.user.username
+        return self.user
     
     class Meta():
         unique_together = ('user', 'community')

@@ -132,6 +132,16 @@ Parameters needed:
 
 use this endpoint to delete a community, only the owner can delete (it will raise unauthorized error if someone else tries to access it)
 
+```
+/api/communities/<slug>/members/
+```
+Methods allowed: POST
+Parameters needed: 
+{
+"Authorization":"JWT {{ access token }},
+}
+
+use this endpoint to add/remove members from a community. If the member instance exists it will delete it(hence removing the member from the community), if the member instance does not exist it will create that instance.(hence joining the community)
 
 # Tests
 ```

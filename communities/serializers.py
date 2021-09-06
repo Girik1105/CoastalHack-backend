@@ -4,7 +4,7 @@ from users.serializers import UserSerializer
 from . import models 
 
 class post_serializer(serializers.ModelSerializer):
-    user = UserSerializer(read_only=True)
+    author= UserSerializer(read_only=True)
     
     class Meta:
         model = models.Post
@@ -31,8 +31,14 @@ class post_serializer(serializers.ModelSerializer):
         
         return data 
 
-class community_serializer(serializers.ModelSerializer):    
+class member_serializer(serializers.ModelSerializer):    
+    class Meta:
+        model = models.member
+        fields = "__all__"
+        
+
+class community_serializer(serializers.ModelSerializer):   
+    # members = member_serializer(read_only=True, many=True) 
     class Meta:
         model = models.community
         fields = ("name", "slug", "description",  "owner", "members", "cover", "created_on")
-    

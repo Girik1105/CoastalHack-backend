@@ -8,4 +8,6 @@ urlpatterns = [
     path('list/', views.list_community, name="community-list"),
     path('edit/<str:slug>/', views.edit_community, name="community-edit"),
     path('delete/<str:slug>/', views.delete_community, name="community-delete"),
+
+    path('<str:slug>/members/', views.add_remove_members, name="member-management"),
 ]
