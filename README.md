@@ -58,6 +58,17 @@ Parameters needed:
 
 To get a new access and refresh token, send a post request to this endpoint to get a new access and refresh token 
 
+Logout
+
+```
+/users/logout/blacklist/
+```
+To blacklist access JWT tokens once a user logouts so they don't use the same token to get refresh tokens
+Methods allowed: POST
+Parameters needed: 
+{
+"refresh"
+}
 
 # Tests
 
