@@ -143,6 +143,44 @@ Parameters needed:
 
 use this endpoint to add/remove members from a community. If the member instance exists it will delete it(hence removing the member from the community), if the member instance does not exist it will create that instance.(hence joining the community)
 
+# Community Posts
+```
+/api/communities/<slug>/posts/create/
+```
+Methods allowed: POST
+Parameters needed: 
+{
+"Authorization":"JWT {{ access token }},
+"content":"",
+"image":"",
+}
+
+Use this endpoint to create community posts 
+
+```
+/api/communities/<slug>/posts/list/
+```
+Methods allowed: GET
+Parameters needed: 
+{
+"Authorization":"JWT {{ access token }},
+}
+or no parameters (no auth is needed for listing community posts)
+
+use this endpoint to list all posts of any specific community
+
+```
+/api/communities/<slug>/posts/<post pk>/delete/
+```
+Methods allowed: GET
+Parameters needed: 
+{
+"Authorization":"JWT {{ access token }},
+}
+
+use this endpoint to delete any users post of any specific community. Note: if a user tries to delete a post that he does not own, it will raise a 401 un-authorized error.
+
+
 # Tests
 ```
 python manage.py test

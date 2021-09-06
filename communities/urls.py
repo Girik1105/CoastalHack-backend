@@ -10,4 +10,8 @@ urlpatterns = [
     path('delete/<str:slug>/', views.delete_community, name="community-delete"),
 
     path('<str:slug>/members/', views.add_remove_members, name="member-management"),
+
+    path('<str:slug>/posts/create/', views.create_community_posts, name="community-posts-create"),
+    path('<str:slug>/posts/list/', views.list_community_posts, name="community-posts-list"),
+    path('<str:slug>/posts/<int:pk>/delete/', views.delete_community_posts, name="community-posts-delete"),
 ]

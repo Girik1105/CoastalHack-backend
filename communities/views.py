@@ -9,6 +9,7 @@ from rest_framework.response import Response
 
 from . import models, serializers
 
+# Communities CRUD
 
 @api_view(['POST'])
 @permission_classes((IsAuthenticated,))
@@ -92,3 +93,48 @@ def add_remove_members(request, slug):
         community.owner = oldest_member.user
         community.save()
         return Response({'Successful':'Member deleted sucessfully'}, status=status.HTTP_200_OK)
+
+# Posts CRUD
+
+@api_view(['POST'])
+@permission_classes((IsAuthenticated,))
+def create_community_posts(request, slug):
+    user = request.user 
+    data = request.data
+    community = models.community.objects.get(slug=slug)
+
+    post = models.Post.objects.create(
+        author = user,
+        content = data['content'],
+        image = data['image'],
+        community = community
+    )
+
+    serializer = serializers.post_serializer(post, many=False)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+@permission_classes((IsAuthenticatedOrReadOnly,))
+def list_community_posts(request, slug):
+    user = request.user 
+    community = models.community.objects.get(slug=slug)
+
+    posts = models.Post.objects.filter(community=community)
+
+    serializer = serializers.post_serializer(posts, many=True)
+    return Response(serializer.data)
+
+@api_view(['DELETE'])
+@permission_classes((IsAuthenticatedOrReadOnly,))
+def delete_community_posts(request, slug, pk):
+    user = request.user 
+    community = models.community.objects.get(slug=slug)
+    
+    try:
+        post = models.Post.objects.get(pk=pk, author=user, community=community)
+    except:
+        return Response(status=status.HTTP_401_UNAUTHORIZED)
+    
+    post.delete()
+    return Response({'Successful':'Post deleted sucessfully'}, status=status.HTTP_200_OK)
