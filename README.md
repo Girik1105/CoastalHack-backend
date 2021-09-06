@@ -197,8 +197,9 @@ python list.py
 python delete.py
 ```
 
+Enter the scripts directory
 ```
-cd project/scripts/community-posts
+cd project/scripts/community_posts
 ```
 
 Run the scripts
