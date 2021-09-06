@@ -32,7 +32,7 @@ urlpatterns = [
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 
     path('users/', include('users.urls')),
-    path('communities/', include('users.urls')),
+    path('api/communities/', include('communities.urls')),
     
     path('schema/', get_schema_view(
         title="API",
@@ -45,4 +45,3 @@ urlpatterns = [
         description="API",
     ), name="docs")
 ]
-

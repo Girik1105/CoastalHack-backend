@@ -16,8 +16,12 @@ class community(models.Model):
     description = models.TextField(blank=True, default='')
     owner = models.ForeignKey(User, related_name='admin', on_delete= models.CASCADE)
     members = models.ManyToManyField(User, through='member')
-    cover = models.ImageField(upload_to='uploads/covers', default='uploads/covers/default.jpg', blank=True)
-    created_on = models.DateTimeField(auto_now_add=True)
+    cover = models.ImageField(upload_to='uploads/covers', default='uploads/covers/default.jpg', blank=True, null=True)
+    created_on = models.DateTimeField(auto_now_add=True)    
+
+    def __str__(self):
+        return self.name
+
 
 class member(models.Model):
     community = models.ForeignKey(community, related_name='membership', on_delete = models.CASCADE)

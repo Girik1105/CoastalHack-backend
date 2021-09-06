@@ -79,7 +79,61 @@ Parameters needed:
 "refresh"
 }
 
-# Tests
+# Communities
+```
+/api/communities/create/
+```
+Methods allowed: POST
+Parameters needed: 
+{
+"Authorization":"JWT {{ access token }},
+"name":"",
+"description":"",
+"cover":"",
+}
+
+Use this endpoint to create communities
 
 ```
+/api/communities/list/
+```
+Methods allowed: GET
+Parameters needed: 
+{
+"Authorization":"JWT {{ access token }},
+}
+or no parameters (no auth is needed for listing communities)
+
+use this endpoint to list all communities 
+
+```
+/api/communities/edit/<community slug>
+```
+Methods allowed: PATCH
+Parameters needed: 
+{
+"Authorization":"JWT {{ access token }},
+"name":"",
+"description":"",
+"cover":"",
+}
+
+use this endpoint to edit a community, only the owner can send a patch request (it will raise unauthorized error if someone else tries to access it)
+Partial data is allowed at this endpoint
+
+```
+/api/communities/delete/<community slug>
+```
+Methods allowed: DELETE
+Parameters needed: 
+{
+"Authorization":"JWT {{ access token }},
+}
+
+use this endpoint to delete a community, only the owner can delete (it will raise unauthorized error if someone else tries to access it)
+
+
+# Tests
+```
 python manage.py test
+```
