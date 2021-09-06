@@ -11,9 +11,12 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-import environ
-from datetime import timedelta
+
 import os
+import environ
+
+from datetime import timedelta
+from django.core.management.utils import get_random_secret_key
 
 env = environ.Env(
     # set casting, default value
@@ -30,7 +33,7 @@ environ.Env.read_env()
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = env('SECRET_KEY') or get_random_secret_key() 
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
